@@ -1,0 +1,189 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<div class="container-fluid">
+    <h3 class="text-center"> Order No : {{order.order_no}}</h3>
+    <h4> Current Status: {{ order.status }} &nbsp; </h4>
+    <form action="/update_status/{{order.order_no}}/" method="POST">{% csrf_token %}
+                <div class="row">
+        <div class="col-sm-3"><h4><strong>Update Status :</strong></h4></div>
+        <div class="col-sm-9">
+            <div class="btn-group" data-toggle="buttons">
+                <label class="btn btn-default">
+                    <input type="radio"  name="update_status" value="Dispatched" checked />Dispatched
+                </label> 
+                <label class="btn btn-default">
+                    <input type="radio"  name="update_status" value="Loaded" /> Loaded
+                </label> 
+                <label class="btn btn-default">
+                    <input type="radio"  name="update_status" value="Unloaded"/> Unloaded
+                </label> 
+                <label class="btn btn-default">
+                    <input type="radio"  name="update_status" value="Pending"/> Pending
+                </label>
+                <label class="btn btn-default">
+                    <input type="radio"  name="update_status" value="OnRoute"/> On Route
+                </label>
+                <label class="btn btn-default">
+                    <input type="radio"  name="update_status" value="Free"/> Free
+                </label>
+                <label class="btn btn-default">
+                    <input type="radio"  name="update_status" value="Complete" /> Complete
+                </label>&nbsp;
+                
+                </div>
+            <input type=submit class="btn btn-success" value="Update Status">
+        </div>
+    </div>
+                
+                </form>
+    
+<div class='row' id='order'>
+    <h2 class="text-center">Order Details</h2>
+    {% if 'No Info Available' in order %}
+    <h1 class='text-center'>{{order}}</h1>
+    {% else %}
+<div class='col-md-6'>
+     <h5 class='text-center'>Creator : {{order.creator}}</h5>
+     <h5 class='text-center'>Shipper : {{order.shipper}}</h5>
+     <h5 class='text-center'>Reciever : {{order.reciever}}</h5>
+     <h5 class='text-center'>Charges : {{order.charges}}</h5>
+    </div>   
+<div class='col-md-6'>
+     <h5 class='text-center'>Types : {{order.types}}</h5>
+    <h5 class='text-center'>Currency Type: {{order.currency_type}}</h5>
+    <h5 class='text-center'>other Charges : {{order.other_charges}}</h5>
+    <h5 class='text-center'>total Charges : {{order.total_charges}}</h5>
+    </div>  
+</div>
+ {%endif%}
+<hr class="divider">
+
+<div class='row' id='shipper'>
+    <h2 class="text-center">Shipping Details</h2>
+    {% if 'No Info Available' in shipper %}
+    <h1 class='text-center'>{{shipper}}</h1>
+    {% else %}
+    <div class="col-md-6">
+    <h5 class='text-center'>Shipper : {{shipper.shipper}}</h5>
+    <h5 class='text-center'>Shipping Date: {{shipper.shipping_date}}</h5>
+    <h5 class='text-center'>Address: {{shipper.address}}</h5>
+    <h5 class='text-center'>City: {{shipper.city}}</h5>
+    <h5 class='text-center'>State: {{shipper.state}}</h5>
+    </div>
+ <div class='col-md-6'>
+     <h5 class='text-center'>Zip Code : {{shipper.zip_code}}</h5>
+    <h5 class='text-center'>Contact Name: {{shipper.contact_name}}</h5>
+    <h5 class='text-center'>Email : {{shipper.email}}</h5>
+    <h5 class='text-center'>Phone No : {{shipper.phone_no}}</h5>
+    </div>
+</div>
+{%endif%}
+<hr class="divider">
+    
+<div class='row' id='reciever'>
+    <h2 class="text-center">Reciever's Details</h2>
+    {% if 'No Info Available' in reciever %}
+    <h1 class='text-center'>{{reciever}}</h1>
+    {% else %}
+    <div class="col-md-6">
+    <h5 class='text-center'>Reciever : {{reciever.reciever}}</h5>
+    <h5 class='text-center'>Recieving Date: {{reciever.shipping_date}}</h5>
+    <h5 class='text-center'>Address: {{reciever.address}}</h5>
+    <h5 class='text-center'>City: {{reciever.city}}</h5>
+    <h5 class='text-center'>State: {{reciever.state}}</h5>
+    </div>
+ <div class='col-md-6'>
+     <h5 class='text-center'>Zip Code : {{reciever.zip_code}}</h5>
+    <h5 class='text-center'>Contact Name: {{reciever.contact_name}}</h5>
+    <h5 class='text-center'>Email : {{reciever.email}}</h5>
+    <h5 class='text-center'>Phone No : {{reciever.phone_no}}</h5>
+    </div>
+</div>
+{%endif%}
+<hr class="divider">
+
+<div class='row' id='bill'>
+    <h2 class="text-center">Bill To</h2>
+    {% if 'No Info Available' in bill %}
+    <h1 class='text-center'>{{bill}}</h1>
+    {% else %}
+    <div class="col-md-6">
+    <h5 class='text-center'>Bill To : {{bill.reciever}}</h5>
+    <h5 class='text-center'>Address : {{bill.shipping_date}}</h5>
+    <h5 class='text-center'>City: {{bill.city}}</h5>
+    <h5 class='text-center'>State: {{bill.state}}</h5>
+    </div>
+ <div class='col-md-6'>
+     <h5 class='text-center'>Zip Code : {{bill.zipcode}}</h5>
+    <h5 class='text-center'>Contact Name: {{bill.contact_name}}</h5>
+    <h5 class='text-center'>Total Charges: {{bill.total_charges}}</h5>
+    </div>
+</div>
+{%endif%}
+<hr class="divider">
+<div class='row' id='pay'>
+    <h2 class="text-center">Pay To</h2>
+    {% if 'No Info Available' in pay %}
+    <h1 class='text-center'>{{pay}}</h1>
+    {% else %}
+    <div class="col-md-6">
+    <h5 class='text-center'>Bill To : {{pay.reciever}}</h5>
+    <h5 class='text-center'>Address : {{pay.shipping_date}}</h5>
+    <h5 class='text-center'>City: {{pay.city}}</h5>
+    <h5 class='text-center'>State: {{pay.state}}</h5>
+    </div>
+ <div class='col-md-6'>
+     <h5 class='text-center'>Zip Code : {{pay.zipcode}}</h5>
+    <h5 class='text-center'>Contact Name: {{pay.contact_name}}</h5>
+    <h5 class='text-center'>Total Charges: {{pay.total_charges}}</h5>
+    </div>
+</div>
+{%endif%}
+<hr class="divider">
+
+<div class='row' id='equipment'>
+    <h2 class="text-center">Equipment To</h2>
+    {% if 'No Info Available' in equipment %}
+    <h1 class='text-center'>{{equipment}}</h1>
+    {% else %}
+    <div class="col-md-6">
+    <h5 class='text-center'>Dispatch Location : {{equipment.dispatch_location}}</h5>
+    <h5 class='text-center'>Driver Name : {{equipment.driver_name}}</h5>
+    <h5 class='text-center'>Driver Cell: {{equipment.driver_cell}}</h5>
+    <h5 class='text-center'>Load Weight : {{equipment.load_weight}}</h5>
+    <h5 class='text-center'>Loaded Material : {{equipment.loaded_material}}</h5>
+    </div>
+ <div class='col-md-6'>
+     <h5 class='text-center'>Truck No : {{equipment.truck_no}}</h5>
+    <h5 class='text-center'>Trailor No: {{equipment.trailor_no}}</h5>
+    <h5 class='text-center'>Equipment Type: {{equipment.equipment_type}}</h5>
+    <h5 class='text-center'>Total Kms: {{equipment.total_kms}}</h5>
+    </div>
+</div>
+{%endif%}
+<hr class="divider">
+
+<div class='row' id='carrier'>
+    <h2 class="text-center">carrier To</h2>
+    {% if 'No Info Available' in carrier %}
+    <h1 class='text-center'>{{carrier}}</h1>
+    {% else %}
+    <div class="col-md-6">
+    <h5 class='text-center'>Carrier : {{carrier.dispatch_location}}</h5>
+    <h5 class='text-center'>Address : {{carrier.address}}</h5>
+    <h5 class='text-center'>City: {{carrier.city}}</h5>
+    <h5 class='text-center'>State : {{carrier.state}}</h5>
+    </div>
+ <div class='col-md-6'>
+     <h5 class='text-center'>Contact Name : {{carrier.contact_name}}</h5>
+    <h5 class='text-center'>Email: {{carrier.email}}</h5>
+    <h5 class='text-center'>Phone No: {{carrier.ph_no}}</h5>
+    <h5 class='text-center'>Fax No: {{carrier.fax_no}}</h5>
+    </div>
+</div>
+</div>
+{%endif%}
+<hr class="divider">
+{% endblock %}

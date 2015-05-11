@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block form %}
+<div class="container">
+    <h3 class="text-center">{{ title }}</h3>
+    {% load crispy_forms_tags %}
+<form action='{{ path }}' method="post">
+{% csrf_token %}
+    {% crispy form %}
+</form>
+    
+    {% if 'billing' in request.path %}
+     <a href="/equipment/" class="btn btn-danger btn-xs">SKIP TO EQUIPMENT INFO</a>
+    {% elif 'equipment' in request.path %}
+    <a href="/carrier/" class="btn btn-danger btn-xs">SKIP TO CARRIER INFO</a>
+    {% endif %}
+</div>
+<script src="/static/js/jquery.js"></script>
+<script>
+$('nav a').click(function(event){
+    $(this).attr('target','_blank');
+})
+</script>
+<script src="/static/js/jquery-ui.js"></script>
+<script src="/static/js/bootstrap.min.js" type="text/javascript"></script>
+    <script>
+  $(function() {
+    $( "#datepicker" ).datepicker();
+    $( "#datepicker1" ).datepicker();
+  });
+  </script>
+{% endblock %}

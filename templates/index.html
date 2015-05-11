@@ -1,0 +1,370 @@
+{% extends 'base.html' %}
+{% block body %}
+
+
+
+<div class="modal fade" id="{{title}}_info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title text-center" id="myModalLabel"><strong>{{ title }} Info</strong></h4>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+            <div class="row">
+            <h5 class='text-center'><strong>{{ title }} Details for Order # :{{ info.for_order}}</strong></h5>
+            <div class="col-md-5">
+        
+            <h5> {{ title }} Date: {% if "Shipping" in title %}
+                {{ info.shipping_date}} {% else %} {{ info.delivery_date}}
+                {% endif %}
+            </h5>
+            <h5> {{ title }} : {% if "Shipping" in title %}
+                {{ info.shipper}} {% else %} {{ info.reciever}}
+                {% endif %}
+            </h5>
+            <h5>  Address: {{ info.address}}</h5>
+            <h5>  City: {{ info.city}}</h5>
+            <h5>  State: {{ info.state}}</h5>
+          </div>
+             <div class="col-md-5 ">
+                 <h5>  zip code: {{ info.zip_code}}</h5>
+                <h5>  Contact Name: {{ info.contact_name}}</h5>
+                  <h5>  Email: {{ info.email}}</h5>
+                <h5>  Phone no: {{ info.phone_no}}</h5>
+                 <h5>  State: {{ info.state}}</h5>
+            </div>
+          </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="bill_pay_info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title text-center" id="myModalLabel"><strong>{{ title }} Info</strong></h4>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+
+            <h5 class='text-center'><strong>{{ title }} Details for Order # :{{ bill_pay.for_order}}</strong></h5>
+
+            <h5> {{ title }} To: 
+                {% if 'Bill' in title %}{{ bill_pay.bill_to }}
+                {% else%} {{ bill_pay.pay_to}} {%endif%}
+            </h5>
+            <h5> Address: {{ bill_pay.address }}</h5>
+            <h5> City: {{ bill_pay.city }}</h5>
+            <h5> State: {{ bill_pay.state }}</h5>
+            <h5> Zip Code: {{ bill_pay.zipcode }}</h5>
+            <h5> Contact Name: {{ bill_pay.contact_name }}</h5>
+            <h5> Total Charges: {{ bill_pay.total_charges }}</h5>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="equipment_info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title text-center" id="myModalLabel"><strong>{{ title }} Info</strong></h4>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+            <div class="row">
+            <h5 class='text-center'><strong>{{ details }} Details for Order # :{{ details.for_order}}</strong></h5>
+            <div class="col-md-5">
+            <h5> Dispatch Location: {{ details.dispatch_location }}</h5>
+            <h5> Driver_name: {{ details.driver_name.name }}</h5>
+            <h5> Driver_cell: {{ details.driver_cell }}</h5>
+            <h5> Load Weight: {{ details.load_weight }}</h5>
+            <h5> Truck No: {{ details.truck_no }}</h5>
+            
+          </div>
+             <div class="col-md-5 ">
+                 <h5> Trailor No: {{ details.trailor_no }}</h5>
+                 <h5> Equipment Type: {{ details.equipment_type }}</h5>
+                 <h5> Total Kms: {{ details.total_kms }}</h5>
+                 <h5> Total Kms: {{ details.loaded_material }}</h5>
+            </div>
+          </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="carrier_info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title text-center" id="myModalLabel"><strong>{{ title }} Info</strong></h4>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+            <div class="row">
+            <h5 class='text-center'><strong>{{ title }} Details for Order # :{{ carrier.for_order}}</strong></h5>
+            <div class="col-md-5">
+            </h5>
+            <h5>{{ title }}: {{carrier.carrier}}</h5>
+            <h5>  Address: {{ carrier.address}}</h5>
+            <h5>  City: {{ carrier.city}}</h5>
+            <h5>  State: {{ carrier.state}}</h5>
+          </div>
+             <div class="col-md-5 ">
+                <h5>  Contact Name: {{ carrier.contact_name}}</h5>
+                  <h5>  Email: {{ carrier.email}}</h5>
+                <h5>  Phone no: {{ carrier.ph_no}}</h5>
+                 <h5>  Fax no: {{ carrier.fax_no}}</h5>
+            </div>
+          </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- modal =====================================-->
+<div class= "container-fluid">
+    <div role="tabpanel">
+
+  <!-- Nav tabs -->
+      <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active">
+            <a href="#home" aria-controls="home" role="tab" data-toggle="tab">
+                <i class="fa fa-3x fa-pie-chart"></i>&nbsp;&nbsp;<h2 class="pull-right">&nbsp;<strong>Dispatch Board</strong></h2>
+            </a>
+          </li>
+        <li role="presentation">
+            <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">
+                <i class="fa fa-3x fa-users"></i>&nbsp;&nbsp;<h2 class="pull-right">&nbsp;<strong>Driver Profile</strong></h2>
+            </a>
+          </li>
+        <li role="presentation">
+            <a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">
+                <i class="fa fa-3x fa-truck"></i>&nbsp;&nbsp;<h2 class="pull-right">&nbsp;<strong>Current Status</strong></h2>
+            </a> 
+          </li>
+  </ul>
+      </div>
+    <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="home">
+              
+              <section id="records">
+                  <br/>
+                    <div class="row">
+                    <div class="col-lg-12">
+                        
+                            <h5><i class="fa fa-circle-thin success"></i>
+                                <a href="/get_status/Dispatched" >DISPATCHED</a>
+                            &nbsp;
+                            <i class="fa fa-circle-thin info"></i>
+                                <a href="/get_status/Loaded/">LOADED</a>
+                            &nbsp;
+                            <i class="fa fa-circle-thin complete"></i>
+                                <a href="/get_status/Complete/">COMPLETE</a>
+                            &nbsp;
+                            <i class="fa fa-circle-thin warning"></i>
+                                <a href="/get_status/Unloaded/">UNLOADED</a>
+                            &nbsp;
+                            <i class="fa fa-circle-thin danger"></i>
+                                <a href="/get_status/Pending/">PENDING</a>
+                           &nbsp;
+                            <i class="fa fa-circle-thin free"></i>
+                                <a href="/get_status/Free/">FREE</a>
+                           &nbsp;
+                           <i class="fa fa-circle-thin on-route"></i>
+                                <a href="/get_status/OnRoute/">ON-ROUTE</a>
+                           </h5>&nbsp;
+                    <a href='/driver/' class="btn btn-info btn-sm">ADD NEW DRIVER</a>&nbsp;
+                    <a href='/truck/' class="btn btn-success btn-sm">ADD NEW TRUCK</a>&nbsp;
+                    <a href='/trailer/' class="btn btn-warning btn-sm">ADD NEW TRAILER</a>&nbsp;
+                    <a href='/orders/' class="btn btn-danger btn-sm">ADD NEW ORDER</a>&nbsp;
+                        <br/>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Order#</th>
+                                        <th>Status</th>
+                                        <th>Creator</th>
+                                        <th>Shipper</th>
+                                        <th>Reciever</th>
+                                        <th>Charges</th>
+                                        <th>Types</th>
+                                        <th>Currency Type</th>
+                                        <th>Truck</th>
+                                        <th>Trailer</th>
+                                        <th>Other Charges</th>
+                                        <th data-toggle="tooltip" title="Shipping Info">
+                                            Shipper Info
+                                        </th>
+                                        <th data-toggle="tooltip" title="Reciever Info">
+                                            Reciever Info
+                                        </th>
+                                        <th data-toggle="tooltip" title="Carrier Info">
+                                            Carrier Info
+                                        </th>
+                                        <th data-toggle="tooltip" title="Billing Info">
+                                            Bill To Info
+                                        </th>
+                                        <th data-toggle="tooltip" title="Paying Info">
+                                            Pay To Info
+                                        </th>
+                                        <th data-toggle="tooltip" title="Equipment Info">
+                                            Equipment Info
+                                        </th>
+                                        <th data-toggle="tooltip" title="Carrier Info">
+                                            Carrier Info
+                                        </th>
+                                        <th data-toggle="tooltip" title="Charges+Other Charges">
+                                            Total Charges
+                                        </th>
+                                        <th>Extra</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for i in data %}
+                                    
+                                        {% if 'Dispatched' in i.status %}
+                                          <tr class="success">
+                                       
+                                        {% elif 'Complete' in i.status %}
+                                         <tr class="complete">
+                                            
+                                        {% elif 'Loaded' in i.status %}
+                                         <tr class="info">
+                        
+                                        {% elif 'Unloaded' in i.status %}
+                                         <tr class="warning">
+                            
+                                        {% elif 'Pending' in i.status %}
+                                         <tr class="danger">
+                                             
+                                        {% elif 'Free' in i.status %}
+                                         <tr class="free">
+                                             
+                                        {% elif 'OnRoute' in i.status %}
+                                         <tr class="on-route">
+                                             
+                                        {% endif %}
+                                        <td><a href="/get_details/{{i.order_no}}/"><strong>{{ i.order_no }}</strong></a></td>
+                                        <td>{{ i.status }}</td>
+                                        <td>{{ i.creator }}</td>
+                                        <td>{{ i.shipper }}</td>
+                                        <td>{{ i.reciever }}</td>
+                                        <td>{{ i.charges }}</td>
+                                        <td>{{ i.types }}</td>
+                                        <td>{{ i.currency_type }}</td>
+                                        <td><a href="/truck_info/{{ i.order_no }}">Truck Details
+                                            </a>
+                                        </td>
+                                        <td><a href="/trailer_info/{{ i.order_no }}">Trailer Details
+                                            </a>
+                                        </td>
+                                        <td>{{ i.other_charges }}</td>
+                                        <td><a href="/shipper_info/{{ i.order_no }}/">Shipper Info</a></td>
+                                        <td><a href="/reciever_info/{{ i.order_no }}/">Reciever Info</a></td>
+                                        <td><a href="/carrier_info/{{ i.order_no }}/">Carrier Info</a></td>
+                                        <td><a href="/billing_info/{{ i.order_no }}/">Bill To</a></td>
+                                        <td><a href="/paying_info/{{ i.order_no }}/">Pay To</a></td>
+                                        <td><a href="/equipment_info/{{ i.order_no }}/">Click</a></td>
+                                        <td><a href="/carrier_info/{{ i.order_no }}/">Click</a></td>
+                                        <td>{{ i.total_charges }}</td>
+                                        <td><a href="/edit_info/{{ i.id }}">Edit Info</a></td>
+                                        
+                                    </tr>
+                                    
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                        
+                </div>
+                </section>
+          </div>
+            <!--- profile ------------------->
+          <div role="tabpanel" class="tab-pane" id="profile">
+            <div class="row " id="current">
+                    <div class="col-lg-12">
+                        <h2><strong>Driver Details</strong></h2>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover ">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Task Status(complete/assign)</th>
+                                        <th>License No.</th>
+                                        <th>Expiry license date</th>
+                                        <th>Driver Type</th>
+                                        <th>Passport No</th>
+                                        <th>Passport Expiry</th>
+                                        <th>Status</th>
+                                        <th>Country</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for i in driver %}
+                                    <tr>
+                                     <td>{{ i.name }}</td>
+                                     <td>{{ i.finished_tasks }}/{{ i.assigned_tasks }}</td>
+                                     <td>{{ i.license_no }}</td>
+                                     <td>{{ i.license_expiry }}</td>
+                                     <td>{{ i.driver_type }}</td>
+                                     <td>{{ i.passport_no }}</td>
+                                     <td>{{ i.passport_expiry }}</td>
+                                     <td>{{ i.status }}</td>
+                                     <td>{{ i.country }}</td>
+                                    </tr>
+                                    {%endfor%}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+    
+                </div>
+              
+          </div>
+            <!--------------- Current status ------------->
+          <div role="tabpanel" class="tab-pane" id="messages">
+              <br/>
+              <div class='container'>
+              easy maps
+              </div>
+          </div>
+            <!----------------------- Notifications ---------------->
+          
+                           
+       </div>
+</div>
+<script src="/static/js/jquery.js"></script>
+<script>
+    {% if info %}
+$(window).load(function(){$("#{{title}}_info").modal("show");})
+{% endif %}
+</script>
+<script>
+    {% if details %}
+$(window).load(function(){$("#equipment_info").modal("show");})
+{% endif %}
+</script>
+<script>
+    {% if bill_pay %}
+$(window).load(function(){$("#bill_pay_info").modal("show");})
+{% endif %}
+</script>
+<script>
+    {% if carrier %}
+$(window).load(function(){$("#carrier_info").modal("show");})
+{% endif %}
+</script>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block form %}
+{% load bootstrap3 %}
+<div class="container">
+    <div class="row">
+                    <div class="col-lg-12" >
+                        <h1 class="page-header" style="text-shadow:4px 4px #fff;">
+                            <strong>Forms</strong>
+                        </h1>
+                        <ol class="breadcrumb">
+                            <li>
+                                <i class="fa fa-dashboard"></i>  <a href="/">Home</a>
+                            </li>
+                            <li class="active">
+                                <i class="fa fa-edit"></i>Driver Forms
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+    {% if errors %}
+    <div class="row">
+                    <div class="col-lg-12">
+                        <div class="alert alert-info alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            <i class="fa fa-info-circle"></i>  <strong>Input Error:</strong>
+                            <code><strong>{{ errors }}</strong></code>
+                        </div>
+                    </div>
+                </div>
+    {% endif%}
+    
+<form action="{{ path }}" method="post" class="form">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% buttons %}
+        <button type="submit" class="btn btn-primary">
+            {% bootstrap_icon "gear" %} Submit
+        </button>
+    {% endbuttons %}
+</form>
+    
+</div>
+<script src="/static/js/jquery.js"></script>
+<script src="/static/js/jquery-ui.js"></script>
+<script src="/static/js/bootstrap.min.js" type="text/javascript"></script>
+    <script>
+  $(function() {
+    $( "#datepicker" ).datepicker();
+    $( "#datepicker1" ).datepicker();
+  });
+{% endblock %}
